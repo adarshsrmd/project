@@ -3,9 +3,560 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project</title>
+    <title>NOIR — Digital Experience</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: #0b0b0b;
+            color: #f4f1ea;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1180px, 90%);
+            margin: auto;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .nav-links a {
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-button {
+            border: 1px solid #444;
+            padding: 11px 20px;
+            border-radius: 100px;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .nav-button:hover {
+            background: white;
+            color: black;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: calc(100vh - 90px);
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 80px;
+            padding: 80px 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #aaa;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .eyebrow span {
+            width: 35px;
+            height: 1px;
+            background: #aaa;
+        }
+
+        h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(65px, 9vw, 130px);
+            line-height: 0.88;
+            font-weight: 500;
+            letter-spacing: -6px;
+        }
+
+        h1 em {
+            color: #a7a28f;
+            font-style: italic;
+        }
+
+        .hero-description {
+            max-width: 440px;
+            margin-top: 35px;
+            color: #929292;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .primary {
+            background: #f4f1ea;
+            color: #0b0b0b;
+            padding: 15px 25px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.12);
+        }
+
+        .secondary {
+            border: 1px solid #333;
+            padding: 15px 25px;
+            border-radius: 100px;
+            font-size: 14px;
+            color: #aaa;
+            transition: 0.3s;
+        }
+
+        .secondary:hover {
+            border-color: #777;
+            color: white;
+        }
+
+        /* ORBIT */
+
+        .visual {
+            position: relative;
+            width: 390px;
+            height: 390px;
+            margin: auto;
+            display: grid;
+            place-items: center;
+        }
+
+        .circle {
+            position: absolute;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+        }
+
+        .circle.one {
+            width: 390px;
+            height: 390px;
+            animation: rotate 18s linear infinite;
+        }
+
+        .circle.two {
+            width: 270px;
+            height: 270px;
+            border-color: rgba(255,255,255,0.2);
+            animation: rotateReverse 12s linear infinite;
+        }
+
+        .circle.three {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 30% 30%, #e9e5d9, #777364, #181818);
+            box-shadow:
+                0 0 80px rgba(211,204,175,0.12),
+                inset -20px -20px 40px rgba(0,0,0,0.5);
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 9px;
+            height: 9px;
+            background: #ddd8c8;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #fff;
+        }
+
+        .dot-one {
+            top: 32px;
+            left: 55px;
+        }
+
+        .dot-two {
+            bottom: 55px;
+            right: 40px;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateReverse {
+            from {
+                transform: rotate(360deg);
+            }
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        /* MARQUEE */
+
+        .marquee {
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            overflow: hidden;
+            padding: 18px 0;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            color: #555;
+            font-size: 13px;
+            letter-spacing: 4px;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* FEATURES */
+
+        .features {
+            padding: 130px 0;
+        }
+
+        .section-label {
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 11px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(42px, 6vw, 75px);
+            max-width: 750px;
+            line-height: 1;
+            font-weight: 500;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: #222;
+            margin-top: 80px;
+        }
+
+        .feature {
+            background: #0b0b0b;
+            padding: 45px 35px;
+            min-height: 260px;
+            transition: 0.4s;
+        }
+
+        .feature:hover {
+            background: #111;
+            transform: translateY(-5px);
+        }
+
+        .feature-number {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .feature h3 {
+            margin-top: 60px;
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+            font-weight: 500;
+        }
+
+        .feature p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-top: 15px;
+        }
+
+        /* CTA */
+
+        .cta {
+            margin: 30px auto 120px;
+            padding: 90px 50px;
+            text-align: center;
+            border: 1px solid #252525;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255,255,255,0.08), transparent 50%),
+                #101010;
+        }
+
+        .cta h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(45px, 6vw, 80px);
+            font-weight: 500;
+        }
+
+        .cta p {
+            max-width: 500px;
+            margin: 20px auto 35px;
+            color: #777;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #222;
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 60px;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .visual {
+                width: 300px;
+                height: 300px;
+            }
+
+            .circle.one {
+                width: 300px;
+                height: 300px;
+            }
+
+            .circle.two {
+                width: 210px;
+                height: 210px;
+            }
+
+            .circle.three {
+                width: 115px;
+                height: 115px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to the project</h1>
+
+    <div class="container">
+
+        <nav>
+            <div class="logo">NOIR.</div>
+
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#features">Philosophy</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+            <a href="#contact" class="nav-button">Enter →</a>
+        </nav>
+
+        <main>
+
+            <section class="hero" id="about">
+
+                <div>
+                    <div class="eyebrow">
+                        <span></span>
+                        Digital / Human
+                    </div>
+
+                    <h1>
+                        Make<br>
+                        it <em>matter.</em>
+                    </h1>
+
+                    <p class="hero-description">
+                        A quiet digital space for people who believe good design
+                        doesn't need to shout. Thoughtful ideas, beautiful
+                        systems, and technology with a purpose.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#features" class="primary">Explore the idea →</a>
+                        <a href="#contact" class="secondary">Get in touch</a>
+                    </div>
+                </div>
+
+                <div class="visual">
+                    <div class="circle one"></div>
+                    <div class="circle two"></div>
+                    <div class="circle three"></div>
+
+                    <div class="orbit-dot dot-one"></div>
+                    <div class="orbit-dot dot-two"></div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <div class="marquee">
+        <div class="marquee-track">
+            LESS NOISE · MORE MEANING · LESS NOISE · MORE MEANING ·
+            LESS NOISE · MORE MEANING · LESS NOISE · MORE MEANING ·
+        </div>
+    </div>
+
+    <div class="container">
+
+        <section class="features" id="features">
+
+            <div class="section-label">Our philosophy</div>
+
+            <h2 class="section-title">
+                Technology should feel
+                <em>human.</em>
+            </h2>
+
+            <div class="feature-grid">
+
+                <article class="feature">
+                    <span class="feature-number">01 /</span>
+
+                    <h3>Clarity</h3>
+
+                    <p>
+                        Remove everything unnecessary.
+                        What remains should be obvious,
+                        useful, and intentional.
+                    </p>
+                </article>
+
+                <article class="feature">
+                    <span class="feature-number">02 /</span>
+
+                    <h3>Character</h3>
+
+                    <p>
+                        Beautiful things don't have to follow
+                        the template. Build something with
+                        a personality of its own.
+                    </p>
+                </article>
+
+                <article class="feature">
+                    <span class="feature-number">03 /</span>
+
+                    <h3>Purpose</h3>
+
+                    <p>
+                        Every interaction should have a reason.
+                        Every detail should earn its place.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="cta" id="contact">
+
+            <div class="section-label">The next step</div>
+
+            <h2>Start with an idea.</h2>
+
+            <p>
+                Great work doesn't begin with a complicated system.
+                It begins with one simple idea worth building.
+            </p>
+
+            <a href="mailto:hello@example.com" class="primary">
+                Say hello →
+            </a>
+
+        </section>
+
+        <footer>
+            <span>© 2026 NOIR.</span>
+            <span>Designed with intention.</span>
+        </footer>
+
+    </div>
+
 </body>
 </html>
